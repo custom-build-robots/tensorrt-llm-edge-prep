@@ -1,4 +1,4 @@
-# tensorrt-llm-edge-prep
+# TensorRT LLM edge prep
 Reproducible TensorRT-LLM pipeline on NVIDIA RTX A6000 Ada (SM89) — as practical preparation for the NVIDIA TensorRT Edge-LLM ecosystem.
 
 <img src="https://ai-box.eu/wp-content/uploads/2026/05/NVIDIA_RTX_A6000_ADA-1280x640.jpg" alt="NVIDIA RTX A6000 Ada" width="400">
