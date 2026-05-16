@@ -1,13 +1,37 @@
 #!/bin/bash
-###############################################################################
-#  Ubuntu Server – Grundinstallation
-#  Datum: 2026-04-05
-#  Version: 2.2
-#  Beschreibung: Installiert Basissystem, NVIDIA CUDA, Docker,
-#                NVIDIA Container Toolkit (ohne Samba).
-#  Info des Autors: Bitte das Skript vor dem Start einmal durchlesen und
-#  ggf. Versionen (CUDA, NVIDIA Toolkit) an aktuelle Werte anpassen.
-###############################################################################
+# =============================================================================
+# server_setup.sh
+# One-time setup of an Ubuntu 24.04 server for AI inference workloads
+# Target system: Ubuntu 24.04 LTS with NVIDIA GPU (RTX, datacenter, or Jetson)
+# Author: Ingmar Stapel + AI assistants
+# Date: 2026-05-16
+# Version 2.2
+# Prerequisites: Fresh Ubuntu 24.04 install with a sudo-capable non-root user
+# (internet connection required, approx. 3-4 GB downloads)
+#
+# Execution context: ON THE HOST (NOT inside a container)
+#   ./server_setup.sh
+#
+# Installs:
+#   1. System updates and upgrades
+#   2. OpenSSH server (for headless operation)
+#   3. Base packages (curl, git, gnupg2, mc, net-tools, python3-venv)
+#   4. NVIDIA CUDA Toolkit 13.1 and NVIDIA drivers
+#   5. Docker (official repository, with Compose and BuildX plugins)
+#   6. NVIDIA Container Toolkit (pinned to v1.19.0-1 for reproducibility)
+#
+# Foundation for: TensorRT-LLM, Ollama, vLLM, llama.cpp, and any other
+# container-based GPU inference framework. A reboot is required after
+# the script finishes.
+#
+# Note: Pinned versions (CUDA Toolkit, NVIDIA Container Toolkit) should be
+# reviewed and updated to current values before running, especially when the
+# script is older than a few months. NVIDIA releases new versions every
+# few months and outdated keyrings may fail to install.
+#
+# Idempotent: Safe to run multiple times (apt operations skip already-installed
+# packages; the docker group and user assignment are also re-run safely)
+# =============================================================================
 
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
