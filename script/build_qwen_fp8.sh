@@ -223,7 +223,7 @@ total_formatted=$(format_duration "${total_seconds}")
 
 echo
 echo -e "${CYAN}=================================================="
-echo "  Build-Statistik FP8 (für Interview-Tabelle)"
+echo "  Build-Statistik FP16 (für Interview-Tabelle)"
 echo -e "==================================================${NC}"
 printf "  %-22s %s\n" "Modell:"          "${MODEL_NAME}"
 printf "  %-22s %s\n" "Präzision:"       "FP8 (Weights + KV-Cache)"
